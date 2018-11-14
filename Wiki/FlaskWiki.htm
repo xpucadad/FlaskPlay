@@ -5173,7 +5173,7 @@ Error message and password prompt
 <div modified="20141110160622468" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div modified="20181114191216550" modifier="kmr" title="$:/state/sidebar">
+<div modified="20181114221420321" modifier="kmr" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div modified="20141110161949725" title="$:/state/tab--1963855381">
@@ -5188,7 +5188,7 @@ Error message and password prompt
 <div created="20181114022546574" creator="k" modified="20181114022547052" modifier="km" title="$:/status/UserName">
 <pre>kmr</pre>
 </div>
-<div list="[[Bootstrap Setup]] Flask Setup" title="$:/StoryList">
+<div list="Flask [[Bootstrap Setup]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -5308,8 +5308,37 @@ def about():
 * Multiple decorations are allowed with a single function, as with the home() function above.
 </pre>
 </div>
-<div created="20181114191218164" creator="kmr" modified="20181114191300978" modifier="kmr" title="Bootstrap Setup">
-<pre>Bootstrap provides easy access to common style elements.
+<div created="20181114191218164" creator="kmr" modified="20181114221735015" modifier="kmr" title="Bootstrap Setup">
+<pre>Bootstrap provides easy access to common style elements. 
+
+In the tutorial he does not download the entire bootstrap project. Instead he loads the necessary stuff in the ``layout.html`` file from the network.
+
+He gets the lines from the Starter Template in the Introduction section at getbootstrap.com. At the time of this writing, the following 3 lines must be added at the very beginning of the ``&lt;head&gt;`` tag, before everything else:
+
+```
+...
+&lt;!-- Required meta tags --&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, shrink-to-fit=no&quot;&gt;
+
+&lt;!-- Bootstrap CSS --&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css&quot; integrity=&quot;sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO&quot; crossorigin=&quot;anonymous&quot;&gt;
+...
+```
+The following 3 lines need to be added immediately before the close body tag:
+
+```
+...
+&lt;!-- Optional JavaScript --&gt;
+&lt;!-- jQuery first, then Popper.js, then Bootstrap JS --&gt;
+&lt;script src=&quot;https://code.jquery.com/jquery-3.3.1.slim.min.js&quot; integrity=&quot;sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js&quot; integrity=&quot;sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js&quot; integrity=&quot;sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+...
+```
+!!Notes:
+* This usage downloads everything in needs from the internet and does not require that anything be installed.
+* The specific contents of the line may change with time so be sure to check the site directly: https://getbootstrap.com/docs/4.1/getting-started/introduction/
 
 </pre>
 </div>
