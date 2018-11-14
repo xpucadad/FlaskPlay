@@ -1,0 +1,4 @@
+env/
+Wiki/FlaskWiki\.htm_backup
+__pycache__
+.vscode
