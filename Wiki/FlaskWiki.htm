@@ -157,13 +157,21 @@ Error message and password prompt
 
 <li>10th November 2014</li>
 
+<li>Additional Routes</li>
+
+<li>Bootstrap Setup</li>
+
 <li>Flask</li>
 
-<li>Flask - Running without Env Vars</li>
+<li>Providing Data to a Template</li>
 
-<li>Flask Setup</li>
+<li>Running without Env Vars</li>
 
 <li>Setup</li>
+
+<li>Template Inheritance</li>
+
+<li>Templates</li>
 
 <li>Titles</li>
 
@@ -5165,7 +5173,7 @@ Error message and password prompt
 <div modified="20141110160622468" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div modified="20181114022320956" title="$:/state/sidebar">
+<div modified="20181114191216550" modifier="kmr" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div modified="20141110161949725" title="$:/state/tab--1963855381">
@@ -5180,7 +5188,7 @@ Error message and password prompt
 <div created="20181114022546574" creator="k" modified="20181114022547052" modifier="km" title="$:/status/UserName">
 <pre>kmr</pre>
 </div>
-<div list="[[Flask - Running without Env Vars]] Flask [[Flask Setup]]" title="$:/StoryList">
+<div list="[[Bootstrap Setup]] Flask Setup" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -5200,8 +5208,8 @@ Error message and password prompt
 <div created="20141110160501501" modified="20141110160503124" title="$:/temp/NewTagName">
 <pre></pre>
 </div>
-<div created="20181114022648590" creator="kmr" modified="20181114022649480" modifier="kmr" title="$:/temp/search">
-<pre>Flask</pre>
+<div created="20181114022648590" creator="kmr" modified="20181114171142205" modifier="kmr" title="$:/temp/search">
+<pre>Stories</pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="A clean theme that emphasises individual tiddlers" name="Snow White" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.4">
 <pre>{
@@ -5283,12 +5291,80 @@ Error message and password prompt
 <div created="20141110162016075" modified="20141110162154059" tags="Journal" title="10th November 2014">
 <pre></pre>
 </div>
-<div created="20181114022703353" creator="kmr" modified="20181114043517944" modifier="kmr" title="Flask">
-<pre>[[Flask Setup]]&lt;br/&gt;
-[[Flask - Running without Env Vars]]
+<div created="20181114170756024" creator="kmr" modified="20181114190754210" modifier="kmr" title="Additional Routes">
+<pre>```
+@app.route(&quot;/&quot;)
+@app.route(&quot;/home&quot;)
+def home():
+    return &quot;&lt;h1&gt;Home Page&lt;/h1&gt;&quot;
+
+@app.route(&quot;/about&quot;)
+def about():
+    return &quot;&lt;h1&gt;About Page&lt;/h1&gt;&quot;
+
+```
+!!Notes:
+* More functions can be added for different routes. 
+* Multiple decorations are allowed with a single function, as with the home() function above.
 </pre>
 </div>
-<div created="20181114043015578" creator="kmr" modified="20181114043217593" modifier="kmr" title="Flask - Running without Env Vars">
+<div created="20181114191218164" creator="kmr" modified="20181114191300978" modifier="kmr" title="Bootstrap Setup">
+<pre>Bootstrap provides easy access to common style elements.
+
+</pre>
+</div>
+<div created="20181114022703353" creator="kmr" modified="20181114191324099" modifier="kmr" title="Flask">
+<pre>[[Setup]]&lt;br/&gt;
+[[Running without Env Vars]]&lt;br/&gt;
+[[Additional Routes]]&lt;br/&gt;
+[[Templates]]&lt;br/&gt;
+[[Providing Data to a Template]]&lt;br/&gt;
+[[Template Inheritance]]&lt;br/&gt;
+[[Bootstrap Setup]]
+</pre>
+</div>
+<div created="20181114181612752" creator="kmr" modified="20181114184609512" modifier="kmr" title="Providing Data to a Template">
+<pre>In the server file, create a list of dictionaries containing some dummy data. This represents what me might get back from a database call. Here's an example:
+
+```
+posts = [
+    {
+        'author': 'Ken Reed',
+        'title': 'Blog Post 1',
+        'content': 'First post content',
+        'date_posted': '2018-11-14 10:06'
+    },
+    {
+        'author': 'Jane Doe',
+        'title': 'Blog Post 2',
+        'content': 'Second post content',
+        'date_posted': '2018-11-14 10:07'
+    },
+]
+
+```
+Now, change the ``home()`` function to pass this data to ``render_template`` as the keyword argument ``posts``:
+
+```
+def home():
+    return render_template('home.html', posts=posts)
+```
+This will allow the data to be accessed within the html file. We access the data in the html file by adding Ginja code to the ``home.html`` template file:
+
+```
+...
+  &lt;body&gt;
+    {% for post in posts %}
+       &lt;h1&gt;{{post.title}}&lt;/h1&gt;
+       &lt;p&gt;By {{post.author}} on {{post.date_posted}}&lt;/p&gt;
+       &lt;p&gt;{{ post.content }}&lt;/p&gt;
+    {% endfor %}
+  &lt;/body&gt;
+...
+```
+</pre>
+</div>
+<div created="20181114043015578" creator="kmr" modified="20181114190839262" modifier="kmr" title="Running without Env Vars">
 <pre>You can run the server without the ``FLASK_APP`` and ``FLASK_DEBUG`` env vars by adding the following code to the end of the .py file:
 
 ```
@@ -5298,7 +5374,7 @@ if __name__ == '__main__':
 
 </pre>
 </div>
-<div created="20181114022915632" creator="kmr" modified="20181114043401053" modifier="kmr" title="Flask Setup">
+<div created="20181114022915632" creator="kmr" modified="20181114191057778" modifier="kmr" title="Setup">
 <pre>```
 $ python -m venv env
 $ activate
@@ -5336,28 +5412,82 @@ $ flask run
 See [[Flask - Running without Env Vars]] for information about running the server directly from Python without the need for the env variables ``FLASK_APP`` and ``FLASK_DEBUG``.
 </pre>
 </div>
-<div created="20181114022215231" modified="20181114022240447" title="Setup">
-<pre>```
-$ python -m venv env
-$ activate
-$ pip install flask
-```
-Create file ``flaskblog.py``.
+<div created="20181114184615154" creator="kmr" modified="20181114190636167" modifier="kmr" title="Template Inheritance">
+<pre>Rather than repeating common code in every html file, we can use //template inheritance// to keep all the common code together.
+
+First, we need to isolate the common code in an html file in the ``templates`` folder. Let's calll it ``layout.html`` The common code in our example so far includes just the title selection code in the header and the body tags. The content of the body tag is different for each of our pages, so we identify that area as a block named &quot;content&quot;. Here is the ``layout.html`` file:
 
 ```
-$ export FLASK_APP=flaskblog.py
-$ export FLASK_DEBUG=1
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        {% if title %}
+            &lt;title&gt;Flask Blog - {{ title }}&lt;/title&gt;
+        {% else %}
+            &lt;title&gt;Flask Blog&lt;/title&gt;
+        {% endif %}
+    &lt;/head&gt;
+    &lt;body&gt;
+        {% block content %}{% endblock %}
+    &lt;/body&gt;
+&lt;/html&gt;
 ```
+Now the ``home.html`` and ``about.html`` files can inherit from the ``layout.html``. Here is the updated ``home.html`` file:
+
 ```
-$ flask run
+{% extends &quot;layout.html&quot; %}
+{% block content %}
+{% for post in posts %}
+        &lt;h1&gt;{{post.title}}&lt;/h1&gt;
+        &lt;p&gt;By {{post.author}} on {{post.date_posted}}&lt;/p&gt;
+        &lt;p&gt;{{ post.content }}&lt;/p&gt;
+    {% endfor %}
+{% endblock content %}
 ```
-!! Notes:
-# Use the URL provided
-# Stop the server by typing ``^C``.
-# ``FLASK_DEBUG=1`` will cause the application to automatically restart if you change the .py file.
+The first line identifies the template to inherit from. The ``{% block content %}`` and ``{% endblock content %}`` lines surround the code that will replace the block content in the ``layout.html`` file.
 
+Here is the new ``about.html`` file:
 
+```
+{% extends &quot;layout.html&quot; %}
+{% block content %}
+&lt;h1&gt;About Page&lt;/h1&gt;
+{% endblock content %}&lt;!DOCTYPE html&gt;
+```
+In this case, the only content is the ``&lt;h1&gt;`` tag.
+</pre>
+</div>
+<div created="20181114175258806" creator="kmr" modified="20181114190743059" modifier="kmr" title="Templates">
+<pre>You can return html from a flle rather than directly in the code. 
 
+First create a ``templates`` folder in your main project folder. Here create html files in this folder for pages you want to supply for a route. For examply ``templates/home.html``:
+
+```
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Title&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Home Page&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+```
+Next, we need change the code. Add ``render_template`` to the import statement:
+
+```
+from flask import Flask, render_template
+```
+Now change the return statement to use ``render_template`` instead of just returning text:
+
+```
+def home():
+    return render_template('home.html')
+```
+In our running example, the same can be done for the about page:
+
+* Create an ``about.html`` file in the ``templates`` folder.
+* Change the return statement in the ``about()`` function to use ``render_template`` to return the ``about.html`` file, similar to what we did in the ``home()`` function.
 
 </pre>
 </div>
