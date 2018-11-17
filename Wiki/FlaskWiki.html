@@ -149,6 +149,10 @@ Error message and password prompt
 
 <li>$:/SiteTitle</li>
 
+<li>$:/state/showeditpreview</li>
+
+<li>$:/state/sidebar</li>
+
 <li>$:/status/UserName</li>
 
 <li>$:/StoryList</li>
@@ -166,6 +170,8 @@ Error message and password prompt
 <li>Bootstrap Setup</li>
 
 <li>Flask</li>
+
+<li>Nav Bar Issues</li>
 
 <li>Providing Data to a Template</li>
 
@@ -8765,10 +8771,16 @@ Error message and password prompt
 <div created="20181114022454275" modified="20181114022511153" title="$:/SiteTitle">
 <pre>Flask Wiki</pre>
 </div>
+<div created="20181117215355999" creator="kmr" modified="20181117215355999" modifier="kmr" title="$:/state/showeditpreview">
+<pre>yes</pre>
+</div>
+<div created="20181117215354327" creator="kmr" modified="20181117215354328" modifier="kmr" title="$:/state/sidebar">
+<pre>no</pre>
+</div>
 <div created="20181114022546574" creator="k" modified="20181114022547052" modifier="km" title="$:/status/UserName">
 <pre>kmr</pre>
 </div>
-<div list="" title="$:/StoryList">
+<div list="[[Nav Bar Issues]] Flask [[Running without Env Vars]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -8784,19 +8796,19 @@ Error message and password prompt
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
-            &quot;text&quot;: &quot;https://tiddlywiki.com/upgrade.html&quot;
+            &quot;text&quot;: &quot;file:///Users/Ken/Documents/GitHub/FlaskPlay/Wiki/FlaskWiki.html&quot;
         },
         &quot;$:/info/url/host&quot;: {
             &quot;title&quot;: &quot;$:/info/url/host&quot;,
-            &quot;text&quot;: &quot;tiddlywiki.com&quot;
+            &quot;text&quot;: &quot;&quot;
         },
         &quot;$:/info/url/hostname&quot;: {
             &quot;title&quot;: &quot;$:/info/url/hostname&quot;,
-            &quot;text&quot;: &quot;tiddlywiki.com&quot;
+            &quot;text&quot;: &quot;&quot;
         },
         &quot;$:/info/url/protocol&quot;: {
             &quot;title&quot;: &quot;$:/info/url/protocol&quot;,
-            &quot;text&quot;: &quot;https:&quot;
+            &quot;text&quot;: &quot;file:&quot;
         },
         &quot;$:/info/url/port&quot;: {
             &quot;title&quot;: &quot;$:/info/url/port&quot;,
@@ -8804,7 +8816,7 @@ Error message and password prompt
         },
         &quot;$:/info/url/pathname&quot;: {
             &quot;title&quot;: &quot;$:/info/url/pathname&quot;,
-            &quot;text&quot;: &quot;/upgrade.html&quot;
+            &quot;text&quot;: &quot;/Users/Ken/Documents/GitHub/FlaskPlay/Wiki/FlaskWiki.html&quot;
         },
         &quot;$:/info/url/search&quot;: {
             &quot;title&quot;: &quot;$:/info/url/search&quot;,
@@ -8812,7 +8824,7 @@ Error message and password prompt
         },
         &quot;$:/info/url/origin&quot;: {
             &quot;title&quot;: &quot;$:/info/url/origin&quot;,
-            &quot;text&quot;: &quot;https://tiddlywiki.com&quot;
+            &quot;text&quot;: &quot;file://&quot;
         },
         &quot;$:/info/browser/screen/width&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/width&quot;,
@@ -8988,14 +9000,49 @@ The following 3 lines need to be added immediately before the close body tag:
 
 </pre>
 </div>
-<div created="20181114022703353" creator="kmr" modified="20181114191324099" modifier="kmr" title="Flask">
+<div created="20181114022703353" creator="kmr" modified="20181117220515226" modifier="kmr" title="Flask">
 <pre>[[Setup]]&lt;br/&gt;
 [[Running without Env Vars]]&lt;br/&gt;
 [[Additional Routes]]&lt;br/&gt;
 [[Templates]]&lt;br/&gt;
 [[Providing Data to a Template]]&lt;br/&gt;
 [[Template Inheritance]]&lt;br/&gt;
-[[Bootstrap Setup]]
+[[Bootstrap Setup]]&lt;br/&gt;
+[[Nav Bar Issues]]
+</pre>
+</div>
+<div created="20181117214943506" creator="kmr" modified="20181117220353763" modifier="kmr" tags="" title="Nav Bar Issues">
+<pre>I had some issues with the navbar code I downloaded from the tutorial's snippet file.
+
+The first problem that the navbar did not show up. I fixed this by changing 'navbar-dark' to 'navbar-light', and 'bg-steel' to 'bg-light'.
+
+So, from this:
+
+```
+&lt;nav class=&quot;navbar navbar-expand-md navbar-dark bg-steel fixed-top&quot;&gt;
+```
+To this:
+
+```
+&lt;nav class=&quot;navbar navbar-expand-md navbar-light bg-light fixed-top&quot;&gt;
+```
+
+This made the navbar visible, but it is on top of the first entry. To get around this, I added three line breaks infront of the main content block and the sidebar content. 
+
+```
+&lt;br\&gt;&lt;br\&gt;&lt;br\&gt;
+{% block content %}{% endblock %}
+```
+and
+
+```
+&lt;br\&gt;&lt;br\&gt;&lt;br\&gt;
+&lt;h3&gt;Our Sidebar&lt;/h3&gt;
+```
+
+This pushed the content down enough that it was no longer obscured by the navbar.
+
+I have no idea what the root cause of either of these issues is, but I'm going to ignore it so I can continue with what I'm actually trying to learn.
 </pre>
 </div>
 <div created="20181114181612752" creator="kmr" modified="20181114184609512" modifier="kmr" title="Providing Data to a Template">
@@ -9039,7 +9086,7 @@ This will allow the data to be accessed within the html file. We access the data
 ```
 </pre>
 </div>
-<div created="20181114043015578" creator="kmr" modified="20181114190839262" modifier="kmr" title="Running without Env Vars">
+<div created="20181114043015578" creator="kmr" modified="20181117220410208" modifier="kmr" title="Running without Env Vars">
 <pre>You can run the server without the ``FLASK_APP`` and ``FLASK_DEBUG`` env vars by adding the following code to the end of the .py file:
 
 ```

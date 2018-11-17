@@ -1,5 +1,5 @@
 env/
-Wiki/FlaskWiki\.htm_backup
+Wiki/FlaskWiki\.html_backup
 __pycache__
 .vscode
 \.DS_Store
