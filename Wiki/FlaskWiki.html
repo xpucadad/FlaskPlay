@@ -8784,7 +8784,7 @@ Error message and password prompt
 <div created="20181114022546574" creator="k" modified="20181114022547052" modifier="km" title="$:/status/UserName">
 <pre>kmr</pre>
 </div>
-<div list="Flask [[Using Forms]] [[Creating Forms]]" title="$:/StoryList">
+<div list="Flask [[Nav Bar Issues]] [[Creating Forms]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9059,8 +9059,10 @@ Later we will make this an environment variable.
 [[Using Forms]]&lt;br/&gt;
 </pre>
 </div>
-<div created="20181117214943506" creator="kmr" modified="20181117220353763" modifier="kmr" tags="" title="Nav Bar Issues">
-<pre>I had some issues with the navbar code I downloaded from the tutorial's snippet file.
+<div created="20181117214943506" creator="kmr" modified="20181118184540951" modifier="kmr" tags="" title="Nav Bar Issues">
+<pre>@@color:green;Update: I found the cause of both issues. The ``static`` folder which contained the local css file ``css/main.css`` was under the ``templates`` folder. It should have been at the same level as the ``templates`` folder. When I moved it, and changed the 2 problem properties, the navbar came back. I was also able to remove the ``&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;``'s from the code. This made it identical with the code provided in the tutorial's github project.@@
+
+I had some issues with the navbar code I downloaded from the tutorial's snippet file.
 
 The first problem that the navbar did not show up. I fixed this by changing 'navbar-dark' to 'navbar-light', and 'bg-steel' to 'bg-light'.
 
