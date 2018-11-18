@@ -169,6 +169,8 @@ Error message and password prompt
 
 <li>Bootstrap Setup</li>
 
+<li>Creating Forms</li>
+
 <li>Flask</li>
 
 <li>Nav Bar Issues</li>
@@ -184,6 +186,8 @@ Error message and password prompt
 <li>Templates</li>
 
 <li>Titles</li>
+
+<li>Using Forms</li>
 
 </ul>
 </p>
@@ -8774,13 +8778,13 @@ Error message and password prompt
 <div created="20181117215355999" creator="kmr" modified="20181117215355999" modifier="kmr" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20181117215354327" creator="kmr" modified="20181117215354328" modifier="kmr" title="$:/state/sidebar">
+<div created="20181117215354327" creator="kmr" modified="20181117221717829" modifier="kmr" title="$:/state/sidebar">
 <pre>no</pre>
 </div>
 <div created="20181114022546574" creator="k" modified="20181114022547052" modifier="km" title="$:/status/UserName">
 <pre>kmr</pre>
 </div>
-<div list="[[Nav Bar Issues]] Flask [[Running without Env Vars]]" title="$:/StoryList">
+<div list="Flask [[Using Forms]] [[Creating Forms]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9000,7 +9004,49 @@ The following 3 lines need to be added immediately before the close body tag:
 
 </pre>
 </div>
-<div created="20181114022703353" creator="kmr" modified="20181117220515226" modifier="kmr" title="Flask">
+<div created="20181117221742316" creator="kmr" modified="20181117225242136" modifier="kmr" title="Creating Forms">
+<pre>In flask, the most common package for dealing with forms is WTForms.
+
+To install, go to project, activate the venv, then instal WTForms:
+
+```
+$ activate
+(env) $ pip install flask-wtf
+```
+Next, create a new file in the project directory called ``forms.py``.
+
+Forms are defined in this file as classes derived from ``FlaskForm`` and containing variables which define each of the form fields. (See the ``forms.py`` in the tutorial.)
+
+After defining the forms, we need to add a secret key to the application. In the main application file, right under the app definition, add the following:
+
+```
+...
+app = Flask(__name__)
+app.config['SECRET_KEY'] = ''
+...
+```
+
+Now we can use Python to generate a secret key:
+
+```
+(env) $ python
+&gt;&gt;&gt; import secrets
+&gt;&gt;&gt; secrets.token_hex(16)
+'d4ff9a962344d77e6864418a877864f7'
+&gt;&gt;&gt;
+```
+This string can then be pasted into the app.config line:
+
+```
+...
+app.config['SECRET_KEY'] = 'd4ff9a962344d77e6864418a877864f7'
+...
+```
+Later we will make this an environment variable.
+
+</pre>
+</div>
+<div created="20181114022703353" creator="kmr" modified="20181117225325880" modifier="kmr" title="Flask">
 <pre>[[Setup]]&lt;br/&gt;
 [[Running without Env Vars]]&lt;br/&gt;
 [[Additional Routes]]&lt;br/&gt;
@@ -9008,7 +9054,9 @@ The following 3 lines need to be added immediately before the close body tag:
 [[Providing Data to a Template]]&lt;br/&gt;
 [[Template Inheritance]]&lt;br/&gt;
 [[Bootstrap Setup]]&lt;br/&gt;
-[[Nav Bar Issues]]
+[[Nav Bar Issues]]&lt;br/&gt;
+[[Creating Forms]]&lt;br/&gt;
+[[Using Forms]]&lt;br/&gt;
 </pre>
 </div>
 <div created="20181117214943506" creator="kmr" modified="20181117220353763" modifier="kmr" tags="" title="Nav Bar Issues">
@@ -9245,6 +9293,28 @@ Red text
 
 
 
+</pre>
+</div>
+<div created="20181117225333874" creator="kmr" modified="20181118003759226" modifier="kmr" title="Using Forms">
+<pre>Now that we have the forms, we need to use them.
+
+Import the two forms into the main application file ``flaskblog.py``:
+
+```
+...
+from forms import RegistrationForm, LoginForm
+...
+```
+To use a form, create a new route. Here is the new route for /login:
+
+```
+@app.route(&quot;/login&quot;)
+def login():
+  form = LoginForm()
+  return render_template('login.html', title='Login', form=form)
+```
+
+Note that 'login.html' is a form template that still needs to be created. The form templates can be created based on the files provided with the tutorial. It should be straightforward to understand what the html in the templates is doing, as well as the related changes in the ``flaskblog.py`` file.
 </pre>
 </div>
 
