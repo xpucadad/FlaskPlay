@@ -3,3 +3,4 @@ Wiki/FlaskWiki\.html_backup
 __pycache__
 .vscode
 \.DS_Store
+site.db
